@@ -22,6 +22,7 @@ def get_resolutions():
     return resolutions
 
 # Example usage
+
 resolutions = get_resolutions()
 
 for port, resolutions in resolutions.items():
@@ -33,4 +34,4 @@ for port, resolutions in resolutions.items():
             cmd =f"xrandr --output {port} --mode 1920x1080"
             os.system(cmd)
         break    
-   
+
