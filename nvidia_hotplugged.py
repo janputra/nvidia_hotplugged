@@ -3,6 +3,7 @@
 import re
 import subprocess
 import os
+import time
 
 def get_resolutions():
     output = subprocess.check_output(['xrandr']).decode('utf-8')
@@ -21,17 +22,26 @@ def get_resolutions():
     
     return resolutions
 
+try_count=0
+    
 # Example usage
+while True:
+    found = False
+    resolutions = get_resolutions()
 
-resolutions = get_resolutions()
-
-for port, resolutions in resolutions.items():
-    if "HDMI" in port:
-        if "3840x1080" in resolutions:
-            cmd =f"xrandr --output {port} --mode 3840x1080"
-            os.system(cmd)
-        else:
-            cmd =f"xrandr --output {port} --mode 1920x1080"
-            os.system(cmd)
+    for port, resolutions in resolutions.items():
+        if "HDMI" in port:
+            if "3840x1080" in resolutions:
+                cmd =f"xrandr --output {port} --mode 3840x1080"
+                os.system(cmd)
+            else:
+                cmd =f"xrandr --output {port} --mode 1920x1080"
+                os.system(cmd)
+            found = True
+            break
+    try_count = try_count+1 
+           
+    if found or (try_count > 100):
         break    
+    time.sleep(0.1)
 

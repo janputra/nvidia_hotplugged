@@ -1,0 +1,13 @@
+[Unit]
+Description = Nvidia HDMI Hotplug handler
+
+
+[Service]
+Type=simple
+RemainAfterExit=no
+Environment="DISPLAY=:0"
+Environment= "XAUTHORITY=/home/jan/.Xauthority"
+ExecStart=/home/jan/Project/nvidia_hotplugged/nvidia_hotplugged.py
+
+[Install]
+WantedBy=graphical.target
