@@ -7,26 +7,35 @@
 4. Save the configuration file.
 5. Reboot your system for the changes to take effect.
 
-6. After booting up again, cp nvidia_hotplug.service to systmemd service directory by using below command  
 
-    sudo cp ./nvidia_hotplug.sevice /etc/systemd/system/
+A. Using install.sh script to install hot plugged handler service
+Use the command below
+    chmod +x ./install.h
+    sudo ./install.h
+
+
+B. Manually install.sh script to install hot plugged handler service
+
+1. After booting up again, cp nvidia_hotplug.service to systmemd service directory by using below command  
+
+    sudo cp ./nvidia_hotplug.service /etc/systemd/system/
 
 for Ubuntu 18.04 LTS service file needs to be edited as below
 
 a. check $XAUTHORITY by running:
     echo $XAUTHORITY
-b. use printed result as XAUTHORITY environment in service file
+b. use printed result as XAUTHORITY environment in nvidia_hotplug.service service file
 
-7. Reload systemd services by using following command
+2. Reload systemd services by using following command
     sudo systemctl daemon-reload
 
-6. Create a new udev rule to trigger hotplug service. In a text editor, create a new file in the /etc/udev/rules.d/ directory.
-7. Copy 99-hotplugged.rules, for Ubuntu 18.04 LTS, edit rules and change path for systemctl in RUN (from /usr/bin/systemctl to /bin/systemctl )
 
-8. Make the rule file readable by udev by running the following command in the terminal:
+3. Copy 99-hotplugged.rules, for Ubuntu 18.04 LTS, edit rules and change path for systemctl in RUN (from /usr/bin/systemctl to /bin/systemctl )
+
+4. Make the rule file readable by udev by running the following command in the terminal:
     
-    sudo chmod a+r /etc/udev/rules.d/99-monitor-detection.rules
+    sudo chmod a+r /etc/udev/rules.d/99-hotplugged.rules
 
-9. Reload the udev rules to apply the changes by running the following command:
+5. Reload the udev rules to apply the changes by running the following command:
 
     sudo udevadm control --reload-rules

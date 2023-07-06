@@ -1,1 +1,1 @@
-ACTION=="change", KERNEL=="card0", SUBSYSTEM=="drm", RUN+="/usr/bin/systemctl start nvidia_hotplug.service"
+ACTION=="change", KERNEL=="card0", SUBSYSTEM=="drm", RUN+="/bin/systemctl start nvidia_hotplug.service"
